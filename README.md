@@ -11,4 +11,4 @@ TODO:
 
 ###
 Credits:
-Font from https://www.dafont.com/ds-digital.font
+Number display font from https://www.dafont.com/ds-digital.font
