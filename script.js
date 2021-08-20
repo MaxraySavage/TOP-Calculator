@@ -11,15 +11,15 @@ function multiply (a, b) {
 function divide (a, b) {
     return a / b;
 }
-function operate (a, b, operator) {
-    switch (operator) {
-        case '+':
+function operate (a, b, operation) {
+    switch (operation) {
+        case 'plus':
             return add(a, b);
-        case '-':
+        case 'minus':
             return subtract(a, b);
-        case 'x':
+        case 'times':
             return multiply(a, b);
-        case '/':
+        case 'divide':
             return divide(a, b);
     }
 }
@@ -28,6 +28,7 @@ const calcDisplay = {
     isOn: false,
     display: document.getElementById('current-number'),
     signDisplay: document.getElementById('sign-indicator'),
+    operatorPressed: false,
     toggleSign() {
         if(this.signDisplay.textContent === '') {
             this.signDisplay.textContent = '-';
@@ -76,6 +77,10 @@ const calcDisplay = {
         }
     },
     inputDigit(num) {
+        if(this.operatorPressedLast) {
+            this.setDisplayToNumber(0);
+            this.operatorPressedLast = false;
+        }
         if(!this.displayIsFull()) {
             const currentDisplay = this.getDisplay();
             if(currentDisplay !== '0') {
@@ -86,10 +91,14 @@ const calcDisplay = {
         }
     },
     inputDecimal() {
-        if(!this.getDisplay.includes('.') && !this.displayIsFull()) {
-            this.setDisplay(currentDisplay + '.');
+        if(this.operatorPressedLast) {
+            this.setDisplayToNumber(0);
+            this.operatorPressedLast = false;
         }
-    }
+        if(!this.getDisplay().includes('.') && !this.displayIsFull()) {
+            this.setDisplay(this.getDisplay() + '.');
+        }
+    },
     turnOn(){
         if(!this.isOn) {
             this.setDisplay(-888888888888)
@@ -101,12 +110,54 @@ const calcDisplay = {
             }, 4000);
         }
     },
+    del() {
+        this.setDisplay(this.getDisplay().slice(0, -1));
+        if(this.getDisplay() === '') {
+            this.setDisplayToNumber(0);
+        }
+    },
+
 };
+
+const calculator = {
+    previousNumber: 0,
+    currentOperator: '',
+    repeatNumber: 0,
+    consecutiveEquals: false,
+    equals() {
+        const currentNumber = calcDisplay.getDisplayAsNumber();
+        let result;
+        if(this.consecutiveEquals) {
+            result = operate(currentNumber, this.repeatNumber, this.currentOperator);
+        } else {
+            result = operate(this.previousNumber, currentNumber, this.currentOperator);
+            this.repeatNumber = currentNumber;
+        }
+        calcDisplay.setDisplayToNumber(result);
+        this.consecutiveEquals = true;
+        calcDisplay.operatorPressedLast = true;
+    },  
+    pressOperator(operator){
+        if(!this.consecutiveEquals && this.currentOperator !== '') {
+            this.equals();
+            this.consecutiveEquals = false;
+        }
+        this.currentOperator = operator;
+        this.previousNumber = calcDisplay.getDisplayAsNumber();
+        calcDisplay.operatorPressedLast = true;
+        this.consecutiveEquals = false;
+    },
+}
 
 window.addEventListener('load', () => {
     for(let i=0; i <= 9; i++){
         document.getElementById(`button-${i}`).addEventListener('click', ()=>{
             calcDisplay.inputDigit(i);
+        });
+    }
+    for(const operator of ['plus', 'minus', 'times', 'divide']) {
+        document.getElementById('button-'+operator).addEventListener('click',()=>{
+            calculator.pressOperator(operator);
         });
     }
     document.getElementById('button-plus-minus').addEventListener('click',()=>{
@@ -117,9 +168,18 @@ window.addEventListener('load', () => {
             calcDisplay.turnOn();
         } else {
             calcDisplay.setDisplayToNumber(0)
+            calcDisplay.operatorPressedLast = false;
+            calculator.previousNumber = 0;
+            calculator.currentOperator = '';
         } 
     });
     document.getElementById('button-decimal').addEventListener('click',()=>{
         calcDisplay.inputDecimal();
+    });
+    document.getElementById('button-del').addEventListener('click',()=>{
+        calcDisplay.del();
+    });
+    document.getElementById('button-equals').addEventListener('click',()=>{
+        calculator.equals();
     });
 });
