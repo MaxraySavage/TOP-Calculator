@@ -152,16 +152,22 @@ const calculator = {
 window.addEventListener('load', () => {
     for(let i=0; i <= 9; i++){
         document.getElementById(`button-${i}`).addEventListener('click', ()=>{
-            calcDisplay.inputDigit(i);
+            if(calcDisplay.isOn) {
+                calcDisplay.inputDigit(i);
+            }
         });
     }
     for(const operator of ['plus', 'minus', 'times', 'divide']) {
         document.getElementById('button-'+operator).addEventListener('click',()=>{
-            calculator.pressOperator(operator);
+            if(calcDisplay.isOn) {
+                calculator.pressOperator(operator);
+            }
         });
     }
     document.getElementById('button-plus-minus').addEventListener('click',()=>{
-        calcDisplay.toggleSign();
+        if(calcDisplay.isOn) {
+            calcDisplay.toggleSign();
+        }
     });
     document.getElementById('button-on-clr').addEventListener('click',()=>{
         if(!calcDisplay.isOn){
@@ -174,12 +180,18 @@ window.addEventListener('load', () => {
         } 
     });
     document.getElementById('button-decimal').addEventListener('click',()=>{
-        calcDisplay.inputDecimal();
+        if(calcDisplay.isOn) {
+            calcDisplay.inputDecimal();
+        }
     });
     document.getElementById('button-del').addEventListener('click',()=>{
-        calcDisplay.del();
+        if(calcDisplay.isOn) {
+            calcDisplay.del();
+        }
     });
     document.getElementById('button-equals').addEventListener('click',()=>{
-        calculator.equals();
+        if(calcDisplay.isOn) {
+            calculator.equals();
+        }
     });
 });
