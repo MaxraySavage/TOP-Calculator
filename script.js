@@ -11,3 +11,15 @@ function multiply (a, b) {
 function divide (a, b) {
     return a / b;
 }
+function operate (a, b, operator) {
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case 'x':
+            return multiply(a, b);
+        case '/':
+            return divide(a, b);
+    }
+}
