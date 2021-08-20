@@ -4,41 +4,98 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Calculator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Amita&family=Roboto+Mono&display=swap" rel="stylesheet"> 
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-      <div id="calc-container">
-          <div id="display-container">
-              <div id="display">
-                420.69
-              </div>
+    <div id="calc-container">
+      <div id="display-container">
+          <div id="top-bar">
+            <div id="product-label">
+                <div id="company-name">RAYONIX</div>
+                <div id="model-info">
+                    <div id="model-name">MX-EV4G4</div>
+                    <div id="model-features">Solar and Battery Powered</div>
+                </div>
             </div>
-          <div id="button-container">
-              <div class="button">7</div>
-              <div class="button">8</div>
-              <div class="button">9</div>
-              <div class="button">&plus;/&minus;</div>
-              <div class="button">on/c</div>
-              <div class="button">4</div>
-              <div class="button">5</div>
-              <div class="button">6</div>
-              <div class="button">&times;</div>
-              <div class="button">&divide;</div>
-              <div class="button">1</div>
-              <div class="button">2</div>
-              <div class="button">3</div>
-              <div id="plus-button" class="button">&plus;</div>
-              <div class="button">&minus;</div>
-              <div class="button">0</div>
-              <div class="button">.</div>
-              <div class="button">del</div>
-              <div class="button">=</div>
-             
-          </div>
+            <div id="solar-panel-container">
+                <div class="solar-panel"></div>
+                <div class="solar-panel"></div>
+                <div class="solar-panel"></div>
+            </div>
+        </div>
+        <div id="number-display">
+            <div id="negative-indicator">-</div>
+            <div id="current-number">420420420420</div>
+        </div>
+        <div id="feature-label">
+            12 Digit Display
+        </div>
       </div>
+      <div id="buttons-container">
+        <div id="button-7" class="button"  >
+          <div class="button-text">7</div>
+        </div>
+        <div id="button-8" class="button">
+            <div class="button-text">8</div>
+        </div>
+        <div id="button-9" class="button">
+            <div class="button-text">9</div>
+        </div>
+        <div id="button-plus-minus" class="button">
+            <div class="button-text">&plus;/-</div>
+        </div>
+        <div id="button-on-clr" class="button">
+            <div class="button-text">on/c</div>
+        </div>
+        <div id="button-4" class="button">
+            <div class="button-text">4</div>
+        </div>
+        <div id="button-5" class="button">
+            <div class="button-text">5</div>
+        </div>
+        <div id="button-6" class="button">
+            <div class="button-text">6</div>
+        </div>
+        <div id="button-times" class="button">
+            <div class="button-text">&times;</div>
+        </div>
+        <div id="button-divide" class="button">
+            <div class="button-text">&divide;</div>
+        </div>
+        <div id="button-1" class="button">
+            <div class="button-text">1</div>
+        </div>
+        <div id="button-2" class="button">
+            <div class="button-text">2</div>
+        </div>
+        <div id="button-3" class="button">
+            <div class="button-text">3</div>
+        </div>
+        <div id="button-plus" class="button">
+            <div class="button-text">
+                &plus;
+            </div>
+        </div>
+        <div id="button-minus" class="button">
+            <div class="button-text">&minus;</div>
+        </div>
+        <div id="button-0" class="button">
+            <div class="button-text">0</div>
+        </div>
+        <div id="button-decimal" class="button">
+            <div class="button-text">.</div>
+        </div>
+        <div id="button-del" class="button">
+            <div class="button-text">del</div>
+        </div>
+        <div id="button-equal" class="button">
+            <div class="button-text">=</div>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

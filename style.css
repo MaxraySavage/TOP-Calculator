@@ -5,53 +5,172 @@
 
 #calc-container {
     margin:auto;
-    height: 300px;
-    width: 300px;
+    margin-top: 20px;
+    padding: 12px;
+    height: 400px;
+    width: 350px;
     display: flex;
     flex-direction: column;
+    border-radius: 5px;;
+    background-color: rgb(220, 220, 220);
 }
 
-#display-container{
-    background-color: aqua;
-    margin:10px;
-    flex-grow: 1;
+#top-bar {
+    width: 85%;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-#display {
+#product-label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#company-name {
+    font-family: 'Amita', cursive;
+    margin-bottom: -5px;
+    text-shadow:  1px 1px 1px rgb(238, 142, 52), 0 0.1em 1em rgb(246, 216, 82), 0 0.1em 0em rgb(247, 114, 38);;
+}
+
+#model-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+#model-name {
+    font-size: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#model-features {
+    margin-left: 5px;
+    font-size: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#solar-panel-container {
+    height: 20px;
+    width: 30%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: black;
+
+}
+
+.solar-panel {
+    background-image: radial-gradient(rgb(110, 110, 110), rgb(46, 47, 44), black);
+}
+
+#model-label {
+    font-size: 0.7rem;
+}
+
+#display-container{
+    background-color: rgb(238, 238, 238);
+    border-radius: 20px;
+    margin:10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#number-display {
+    display: flex;
+    justify-content: space-between;
     width: 90%;
-    margin-top: 5px;
     padding-left: 4px;
     padding-right: 4px;
     border-radius: 3px;
-    background-color: burlywood;
+    background-color: rgb(170, 165, 158);
     font-family: 'DS-DIGI';
     text-align: right;
-    font-size: 2rem;
+    font-size: 2.8rem;
 }
 
-#button-container {
+#feature-label {
+    font-size: 0.7rem;
+    font-family: 'Amita', cursive;
+}
+
+#buttons-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
     row-gap: 10px;
     column-gap: 10px;
-    flex-grow: 4;
+    flex-grow: 8;
 }
 
 .button {
-    background-color: blue;
-    color:burlywood;
+    color:rgb(245, 237, 227);
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 1px rgba(0, 0, 0, 0.3);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.button:active {
+    
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
+    transform: translate(2px, 2px);
+}
+
+.button-text{
+    font-size: 1.2rem;
     text-align: center;
     font-family: 'Roboto Mono', monospace;
 }
 
-#plus-button {
+#button-plus {
     grid-column-start: 4;
     grid-row-start: 3;
     grid-row-end: span 2;
+    background-color: rgb(248, 137, 243);
 }
+
+#button-7 {
+    background-color: rgb(248, 137, 243);
+}
+
+#button-8, #button-4{
+    background-color: rgb(211, 122, 247);
+}
+
+#button-9, #button-5, #button-1 {
+    background-color: rgb(164, 97, 241);
+}
+
+#button-plus-minus, #button-6, #button-2, #button-0 {
+    background-color: rgb(130, 138, 248);
+}
+
+#button-on-clr, #button-times, #button-3, #button-decimal {
+    background-color: rgb(95, 187, 248);
+}
+
+#button-divide, #button-del {
+    background-color: rgb(48, 201, 221);
+}
+
+#button-minus {
+    background-color: rgb(35, 216, 186);
+}
+
+#button-equal {
+    background-color: rgb(51, 226, 144);
+    /* box-shadow: 3px 3px 3px rgb(51, 226, 144); */
+}
+
