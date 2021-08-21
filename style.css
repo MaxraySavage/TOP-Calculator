@@ -4,7 +4,7 @@
   }
 
 body {
-    background-color: aliceblue;
+    background-color: rgb(54,69,79);
 }
 
 #calc-container {
@@ -18,7 +18,7 @@ body {
     flex-direction: column;
     border-radius: 5px;
     background-color: rgb(220, 220, 220);
-    box-shadow: 10px, 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 6px 6px rgb(220, 220, 220), 4px 4px rgb(220, 220, 220), 2px 2px rgb(170, 169, 169);
 }
 
 #display-container{
