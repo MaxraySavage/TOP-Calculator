@@ -8,7 +8,7 @@ TODO:
 - [x] Create the functions that populate the display when you click the number
 - [x] Make the calculator work!
 - [x] Include decimal button and backspace 
-- [ ] Keyboard Input
+- [x] Keyboard Input
 
 ###
 Credits:
