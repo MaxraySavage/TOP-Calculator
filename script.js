@@ -59,7 +59,11 @@ const calcDisplay = {
             this.inOverflow = true;
             this.signDisplay.textContent = '';
         } else {
-            const numAsString = String(Math.abs(num));
+            const numAbs = Math.abs(num);
+            let numAsString = String(numAbs);
+            if(numAsString.includes('e')) {
+                numAsString = numAbs.toFixed(13)
+            }
             if(numAsString.includes('.')) {
                 this.setDisplay(numAsString.slice(0,13));
             } else {
