@@ -224,4 +224,34 @@ window.addEventListener('load', () => {
             calculator.equals();
         }
     });
+    window.addEventListener('keypress', (e)=> {
+        if(calcDisplay.isOn){
+            e.preventDefault();
+            if(e.key === '/') {
+                calculator.pressOperator('divide');
+            }
+        }
+    });
+    window.addEventListener('keydown', (e)=> {
+        console.log(e.key)
+        if(calcDisplay.isOn){
+            if(!isNaN(e.key)) {
+                calcDisplay.inputDigit(Number(e.key));
+            } else if (e.key === '+') {
+                calculator.pressOperator('plus');
+            } else if (e.key === '-') {
+                calculator.pressOperator('minus');
+            } else if (e.key === '*') {
+                calculator.pressOperator('times');
+            } else if (e.key === '.') {
+                calcDisplay.inputDecimal();
+            } else if (e.key === 'Delete') {
+                calcDisplay.del();
+            } else if (e.key === 'Enter') {
+                calculator.equals();
+            } else if (e.key === '+') {
+                
+            }
+        }
+    });
 });
