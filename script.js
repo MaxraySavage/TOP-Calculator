@@ -31,6 +31,9 @@ const calcDisplay = {
     operatorPressed: false,
     inOverflow: false,
     toggleSign() {
+        if(this.inOverflow) {
+            calculator.clear();
+        }
         if(this.signDisplay.textContent === '') {
             this.signDisplay.textContent = '-';
         } else {
@@ -53,6 +56,7 @@ const calcDisplay = {
     setDisplayToNumber (num) {
         if(Math.abs(num) >= 10**12) {
             this.setDisplay('ERR-Overflow');   
+            this.inOverflow = true;
             this.signDisplay.textContent = '';
         } else {
             const numAsString = String(Math.abs(num));
@@ -134,7 +138,7 @@ const calculator = {
     consecutiveEquals: false,
     equals() {
         if (calcDisplay.inOverflow) {
-            calculator.clear();
+            this.clear();
         }
         if(this.currentOperator !== '') {
             const currentNumber = calcDisplay.getDisplayAsNumber();
@@ -166,6 +170,7 @@ const calculator = {
     clear() {
         calcDisplay.setDisplayToNumber(0)
         calcDisplay.operatorPressedLast = false;
+        calcDisplay.inOverflow = false;
         this.previousNumber = 0;
         this.currentOperator = '';
         this.repeatNumber = 0;
