@@ -29,6 +29,7 @@ const calcDisplay = {
     display: document.getElementById('current-number'),
     signDisplay: document.getElementById('sign-indicator'),
     operatorPressed: false,
+    inOverflow: false,
     toggleSign() {
         if(this.signDisplay.textContent === '') {
             this.signDisplay.textContent = '-';
@@ -80,6 +81,8 @@ const calcDisplay = {
         if(this.operatorPressedLast) {
             this.setDisplayToNumber(0);
             this.operatorPressedLast = false;
+        } else if (this.inOverflow) {
+            calculator.clear();
         }
         if(!this.displayIsFull()) {
             const currentDisplay = this.getDisplay();
@@ -94,6 +97,8 @@ const calcDisplay = {
         if(this.operatorPressedLast) {
             this.setDisplayToNumber(0);
             this.operatorPressedLast = false;
+        } else if (this.inOverflow) {
+            calculator.clear();
         }
         if(!this.getDisplay().includes('.') && !this.displayIsFull()) {
             this.setDisplay(this.getDisplay() + '.');
@@ -111,6 +116,9 @@ const calcDisplay = {
         }
     },
     del() {
+        if (this.inOverflow) {
+            calculator.clear();
+        }
         this.setDisplay(this.getDisplay().slice(0, -1));
         if(this.getDisplay() === '') {
             this.setDisplayToNumber(0);
@@ -125,19 +133,27 @@ const calculator = {
     repeatNumber: 0,
     consecutiveEquals: false,
     equals() {
-        const currentNumber = calcDisplay.getDisplayAsNumber();
-        let result;
-        if(this.consecutiveEquals) {
-            result = operate(currentNumber, this.repeatNumber, this.currentOperator);
-        } else {
-            result = operate(this.previousNumber, currentNumber, this.currentOperator);
-            this.repeatNumber = currentNumber;
+        if (calcDisplay.inOverflow) {
+            calculator.clear();
         }
-        calcDisplay.setDisplayToNumber(result);
-        this.consecutiveEquals = true;
-        calcDisplay.operatorPressedLast = true;
+        if(this.currentOperator !== '') {
+            const currentNumber = calcDisplay.getDisplayAsNumber();
+            let result;
+            if(this.consecutiveEquals) {
+                result = operate(currentNumber, this.repeatNumber, this.currentOperator);
+            } else {
+                result = operate(this.previousNumber, currentNumber, this.currentOperator);
+                this.repeatNumber = currentNumber;
+            }
+            calcDisplay.setDisplayToNumber(result);
+            this.consecutiveEquals = true;
+            calcDisplay.operatorPressedLast = true;
+        }
     },  
     pressOperator(operator){
+        if (calcDisplay.inOverflow) {
+            calculator.clear();
+        }
         if(!this.consecutiveEquals && this.currentOperator !== '') {
             this.equals();
             this.consecutiveEquals = false;
@@ -147,6 +163,14 @@ const calculator = {
         calcDisplay.operatorPressedLast = true;
         this.consecutiveEquals = false;
     },
+    clear() {
+        calcDisplay.setDisplayToNumber(0)
+        calcDisplay.operatorPressedLast = false;
+        this.previousNumber = 0;
+        this.currentOperator = '';
+        this.repeatNumber = 0;
+        this.consecutiveEquals = false;
+    }
 }
 
 window.addEventListener('load', () => {
@@ -173,10 +197,7 @@ window.addEventListener('load', () => {
         if(!calcDisplay.isOn){
             calcDisplay.turnOn();
         } else {
-            calcDisplay.setDisplayToNumber(0)
-            calcDisplay.operatorPressedLast = false;
-            calculator.previousNumber = 0;
-            calculator.currentOperator = '';
+            calculator.clear();
         } 
     });
     document.getElementById('button-decimal').addEventListener('click',()=>{
