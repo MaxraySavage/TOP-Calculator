@@ -28,7 +28,7 @@ const calcDisplay = {
     isOn: false,
     display: document.getElementById('current-number'),
     signDisplay: document.getElementById('sign-indicator'),
-    operatorPressed: false,
+    operatorPressedLast: false,
     inOverflow: false,
     toggleSign() {
         if(this.inOverflow) {
@@ -86,12 +86,13 @@ const calcDisplay = {
         }
     },
     inputDigit(num) {
+        if (this.inOverflow) {
+            calculator.clear();
+        }
         if(this.operatorPressedLast) {
             this.setDisplayToNumber(0);
             this.operatorPressedLast = false;
-        } else if (this.inOverflow) {
-            calculator.clear();
-        }
+        } 
         if(!this.displayIsFull()) {
             const currentDisplay = this.getDisplay();
             if(currentDisplay !== '0') {
