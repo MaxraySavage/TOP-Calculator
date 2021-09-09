@@ -9,6 +9,7 @@ TODO:
 - [x] Make the calculator work!
 - [x] Include decimal button and backspace 
 - [x] Keyboard Input
+- [ ] Refactor to use class selectors
 
 ###
 Credits:
